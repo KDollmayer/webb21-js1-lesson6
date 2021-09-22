@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome to our Coffee Shop</h1>
+    <label for="numbersOfCoffees">Order Coffee Cups</label>
+    <input id="numbersOfCoffees" />
+    <button onclick="onBuyBottonClick()">Buy!</button>
+    <div>
+      You have spent:
+      <p id="totalSpent"></p>
+    </div>
+    <div></div>
+
+    <script>
+      class Customer {
+        constructor() {
+          this.transactions = [];
+          this.discountThreshold = 1000;
+        }
+        addTransaction(amount) {
+          this.transactions.push(amount);
+        }
+        getTotaltSpent() {
+          let sum = 0;
+          this.transactions.forEach((transaction) => {
+            sum += transaction;
+          });
+          return sum;
+        }
+        isEligableForDiscount() {
+          return this.getTotaltSpent() >= this.discountThreshold;
+        }
+      }
+      const costumor = new Customer();
+      function onBuyBottonClick() {
+        const input = document.getElementById("numbersOfCoffees");
+        const pricePerCup = 50;
+
+        const transactionValue = pricePerCup * input.value;
+
+        costumor.addTransaction(transactionValue);
+
+        const totalSpentParagraph = document.getElementById("totalSpent");
+        totalSpentParagraph.innerHTML = costumor.getTotaltSpent();
+      }
+    </script>
+  </body>
+</html>
